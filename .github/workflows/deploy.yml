@@ -4,6 +4,16 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+    inputs:
+      deployment_mode:
+        description: 'Deployment mode'
+        required: false
+        default: 'auto'
+        type: choice
+        options:
+          - auto
+          - custom-domain
+          - github-pages
 
 permissions:
   contents: read
@@ -31,7 +41,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build
+      - name: Detect deployment mode
+        id: detect-mode
+        run: |
+          if [ "${{ github.event.inputs.deployment_mode }}" = "custom-domain" ]; then
+            echo "mode=custom-domain" >> $GITHUB_OUTPUT
+          elif [ "${{ github.event.inputs.deployment_mode }}" = "github-pages" ]; then
+            echo "mode=github-pages" >> $GITHUB_OUTPUT
+          elif [ -f "public/CNAME" ]; then
+            echo "mode=custom-domain" >> $GITHUB_OUTPUT
+            echo "Auto-detected: Custom domain (CNAME file exists)"
+          else
+            echo "mode=github-pages" >> $GITHUB_OUTPUT
+            echo "Auto-detected: GitHub Pages subdirectory (no CNAME file)"
+          fi
+
+      - name: Build for custom domain
+        if: steps.detect-mode.outputs.mode == 'custom-domain'
+        run: npm run build
+        env:
+          USE_CUSTOM_DOMAIN: true
+
+      - name: Build for GitHub Pages
+        if: steps.detect-mode.outputs.mode == 'github-pages'
         run: npm run build
         env:
           REPO_NAME: ${{ github.event.repository.name }}
