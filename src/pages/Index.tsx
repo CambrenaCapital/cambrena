@@ -27,7 +27,7 @@ const Index = () => {
       >
         <img
           src={logo}
-          alt="Cambrena Logo"
+          alt="Cambrena Capital - Venture Capital Firm"
           className="h-16 sm:h-20 md:h-24 object-contain"
         />
       </div>
@@ -38,8 +38,13 @@ const Index = () => {
           animationComplete ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        {/* Main Heading */}
-        <h1 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 tracking-tight leading-none">
+        {/* SEO-optimized H1 for search engines */}
+        <h1 className="sr-only">
+          Cambrena Capital - Venture Capital for Early-Stage Startups in Switzerland
+        </h1>
+
+        {/* Visual H1 for brand consistency */}
+        <h1 aria-hidden="true" className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 tracking-tight leading-none">
           BUILT FOR WHAT'S NEXT
         </h1>
 
@@ -50,12 +55,13 @@ const Index = () => {
       </main>
 
       {/* Footer Links */}
-      <div
+      <footer
         className={`absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4 transition-opacity duration-700 ${
           animationComplete ? 'opacity-100' : 'opacity-0'
         }`}
       >
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
+        <nav aria-label="Footer navigation">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
           <Link to="/imprint" className="hover:opacity-60 transition-opacity whitespace-nowrap">
             Imprint
           </Link>
@@ -80,8 +86,9 @@ const Index = () => {
           >
             <Linkedin size={16} />
           </a>
-        </div>
-      </div>
+          </div>
+        </nav>
+      </footer>
     </div>
   );
 };

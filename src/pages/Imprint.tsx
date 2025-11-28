@@ -9,7 +9,7 @@ const Imprint = () => {
       <Link to="/" className="absolute top-6 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16 hover:opacity-80 transition-opacity">
         <img
           src={logo}
-          alt="Cambrena Logo"
+          alt="Cambrena Capital Logo"
           className="h-16 sm:h-20 md:h-24 object-contain"
         />
       </Link>
@@ -32,8 +32,9 @@ const Imprint = () => {
       </main>
 
       {/* Footer Links */}
-      <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4">
-        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
+      <footer className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <nav aria-label="Footer navigation">
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
           <Link to="/imprint" className="hover:opacity-60 transition-opacity whitespace-nowrap">
             Imprint
           </Link>
@@ -58,8 +59,9 @@ const Imprint = () => {
           >
             <Linkedin size={16} />
           </a>
-        </div>
-      </div>
+          </div>
+        </nav>
+      </footer>
     </div>
   );
 };
