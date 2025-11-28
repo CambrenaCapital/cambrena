@@ -4,9 +4,9 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig(() => ({
-  // Use "/" for custom domains, or "/${REPO_NAME}/" for GitHub Pages subdirectory
-  // Set USE_CUSTOM_DOMAIN=true when building for custom domain
-  base: process.env.USE_CUSTOM_DOMAIN ? "/" : (process.env.REPO_NAME ? `/${process.env.REPO_NAME}/` : "/"),
+  // Automatically use repository name for GitHub Pages
+  // For local dev, defaults to "/"
+  base: process.env.REPO_NAME ? `/${process.env.REPO_NAME}/` : "/",
   server: {
     host: "::",
     port: 8080,
