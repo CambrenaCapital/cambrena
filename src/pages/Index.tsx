@@ -32,6 +32,16 @@ const Index = () => {
         />
       </div>
 
+      {/* About Us Link - Top Right */}
+      <Link
+        to="/about-us"
+        className={`absolute top-6 right-4 sm:top-8 sm:right-8 md:top-12 md:right-16 text-xs font-bold tracking-wider hover:opacity-60 transition-all duration-700 whitespace-nowrap ${
+          animationComplete ? 'opacity-100' : 'opacity-0'
+        }`}
+      >
+        About Us
+      </Link>
+
       {/* Main Content */}
       <main
         className={`relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center transition-opacity duration-700 ${

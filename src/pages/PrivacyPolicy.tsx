@@ -14,6 +14,11 @@ const PrivacyPolicy = () => {
         />
       </Link>
 
+      {/* About Us Link - Top Right */}
+      <Link to="/about-us" className="absolute top-6 right-4 sm:top-8 sm:right-8 md:top-12 md:right-16 text-xs font-bold tracking-wider hover:opacity-60 transition-opacity whitespace-nowrap">
+        About Us
+      </Link>
+
       {/* Main Content */}
       <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
         <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Privacy Policy</h1>

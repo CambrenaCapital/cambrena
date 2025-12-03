@@ -2,7 +2,7 @@ import logo from "@/assets/cambrena-logo.svg";
 import { Linkedin } from "lucide-react";
 import { Link } from "react-router-dom";
 
-const Imprint = () => {
+const AboutUs = () => {
   return (
     <div className="h-screen w-screen overflow-hidden relative flex items-center justify-center bg-background">
       {/* Logo */}
@@ -21,17 +21,9 @@ const Imprint = () => {
 
       {/* Main Content */}
       <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
-        <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">Imprint</h1>
+        <h1 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6">About Us</h1>
         <div className="space-y-2 text-sm">
-          <p>Cambrena AG</p>
-          <p>Haldenstrasse 1</p>
-          <p>6340 Baar</p>
-          <p>Switzerland</p>
-          <p className="mt-4">UID: CHE-307.299.793</p>
-          <p className="mt-4">
-            <a href="mailto:contact@cambrena.net" className="hover:opacity-60 transition-opacity">
-              contact@cambrena.net
-            </a>
+          <p>At Cambrena, we back exceptional founders and businesses across venture and growth equity stages, using capital that isn't bound by traditional fund constraints. Our structure allows for speed and simplicity in decision-making, fewer stakeholders, and the ability to deploy when others can't. We support our companies across stages and through market cycles, focused on long-term value creation rather than forced exits.
           </p>
         </div>
       </main>
@@ -71,4 +63,4 @@ const Imprint = () => {
   );
 };
 
-export default Imprint;
+export default AboutUs;
