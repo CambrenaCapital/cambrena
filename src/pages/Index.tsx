@@ -27,7 +27,7 @@ const Index = () => {
       >
         <img
           src={logo}
-          alt="Cambrena Capital - Venture Capital Firm"
+          alt="Cambrena Capital"
           className="h-16 sm:h-20 md:h-24 object-contain"
         />
       </div>
@@ -40,7 +40,7 @@ const Index = () => {
       >
         {/* SEO-optimized H1 for search engines */}
         <h1 className="sr-only">
-          Cambrena Capital - Venture Capital for Early-Stage Startups in Switzerland
+          Cambrena Capital - Venture Capital and Growth Equity Investments
         </h1>
 
         {/* Visual H1 for brand consistency */}
@@ -50,7 +50,7 @@ const Index = () => {
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-2xl mx-auto tracking-wide">
-          We invest at the earliest stages of a company's growth, using capital that isn't bound by traditional fund lifecycles
+          We back exceptional founders across venture and growth equity stages, using capital that isn't bound by traditional fund constraints
         </p>
       </main>
 
