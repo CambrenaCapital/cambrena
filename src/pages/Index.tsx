@@ -49,7 +49,7 @@ const Index = () => {
         </h1>
 
         {/* Subtitle */}
-        <p className="text-base sm:text-lg md:text-xl mb-8 sm:mb-12 max-w-2xl mx-auto tracking-wide">
+        <p className="text-sm sm:text-base md:text-lg mb-8 sm:mb-12 max-w-2xl mx-auto tracking-wide">
           We back exceptional founders across venture and growth equity stages, using capital that isn't bound by traditional fund constraints
         </p>
       </main>
