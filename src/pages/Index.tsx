@@ -55,7 +55,7 @@ const Index = () => {
 
         {/* Visual H1 for brand consistency */}
         <h1 aria-hidden="true" className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 tracking-tight leading-none">
-          BUILT FOR WHAT'S NEXT
+          BUILDING FOR WHAT'S NEXT
         </h1>
 
         {/* Subtitle */}
