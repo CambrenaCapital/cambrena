@@ -7,6 +7,7 @@ import Imprint from "./pages/Imprint";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AboutUs from "./pages/AboutUs";
 import NotFound from "./pages/NotFound";
+import VCExitsExplorer from "./pages/VCExitsExplorer";
 
 const App = () => (
   <TooltipProvider>
@@ -18,6 +19,7 @@ const App = () => (
         <Route path="/imprint" element={<Imprint />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/vc-exits-explorer" element={<VCExitsExplorer />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>
