@@ -34,8 +34,8 @@ interface Props {
 const COLORS = ['#2563eb', '#059669', '#d97706', '#dc2626', '#7c3aed', '#0891b2', '#ec4899', '#64748b'];
 
 function formatValue(value: number, unit?: string): string {
-  if (unit === '$B') return `$${value.toFixed(1)}B`;
-  if (unit === '$M') return `$${Math.round(value)}M`;
+  if (unit === '$B') return `$${value.toLocaleString(undefined, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}B`;
+  if (unit === '$M') return `$${Math.round(value).toLocaleString()}M`;
   if (unit === '%') return `${value.toFixed(1)}%`;
   if (unit === '\u00d7') return `${value.toFixed(2)}\u00d7`;
   if (typeof value === 'number' && !isNaN(value)) {
@@ -45,11 +45,14 @@ function formatValue(value: number, unit?: string): string {
 }
 
 function formatTick(value: number, unit?: string): string {
-  if (unit === '$B') return `$${value}B`;
-  if (unit === '$M') return `$${value}M`;
+  const n = (typeof value === 'number' && !isNaN(value))
+    ? value.toLocaleString(undefined, { maximumFractionDigits: 2 })
+    : String(value);
+  if (unit === '$B') return `$${n}B`;
+  if (unit === '$M') return `$${n}M`;
   if (unit === '%') return `${value}%`;
   if (unit === '\u00d7') return `${value}\u00d7`;
-  return String(value);
+  return n;
 }
 
 const ChartRenderer = ({ data, config }: Props) => {

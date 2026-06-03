@@ -21,7 +21,15 @@ const TableRenderer = ({ headers, rows }: Props) => {
             <tr key={ri} className={ri % 2 === 0 ? 'bg-white' : 'bg-[#f9fafb]'}>
               {row.map((cell, ci) => (
                 <td key={ci} className="px-4 py-2 text-[#374151] whitespace-nowrap">
-                  {cell != null ? String(cell) : '—'}
+                  {cell != null
+                    ? (() => {
+                        if (typeof cell === 'number' && !isNaN(cell))
+                          return cell.toLocaleString(undefined, { maximumFractionDigits: 2 });
+                        if (typeof cell === 'string' && /^-?\d+(\.\d+)?$/.test(cell.trim()))
+                          return Number(cell).toLocaleString(undefined, { maximumFractionDigits: 2 });
+                        return String(cell);
+                      })()
+                    : '—'}
                 </td>
               ))}
             </tr>

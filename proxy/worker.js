@@ -22,7 +22,7 @@ function corsHeaders(origin) {
 }
 
 export default {
-  async fetch(request) {
+  async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
     const url = new URL(request.url);
 
@@ -44,10 +44,10 @@ export default {
       });
     }
 
-    const apiKey = request.headers.get('X-Api-Key');
+    const apiKey = env.ANTHROPIC_API_KEY;
     if (!apiKey) {
-      return new Response(JSON.stringify({ error: 'Missing API key' }), {
-        status: 401,
+      return new Response(JSON.stringify({ error: 'API key not configured' }), {
+        status: 500,
         headers: { 'Content-Type': 'application/json', ...corsHeaders(origin) },
       });
     }

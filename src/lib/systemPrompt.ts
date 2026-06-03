@@ -35,6 +35,7 @@ CODE RULES:
 - For any time-based or temporal chart, ALWAYS use year as the xKey and set layout to "horizontal" (the default). Sort data chronologically. Never use layout "vertical" for line or area charts.
 - Only use layout "vertical" for horizontal bar charts (e.g. ranking top 10 items). For line, area, and most bar charts, use layout "horizontal".
 - Round: integers for $M, 1 decimal for $B/%, 2 decimals for ×.
+- For type="table", rows must contain raw JavaScript numbers for numeric values — never convert them to strings with .toFixed(), .toString(), String(), or template literals. The UI formats and adds commas automatically.
 - Colors: #2563eb #059669 #d97706 #dc2626 #7c3aed #0891b2 #ec4899 #64748b.
 - End with a return statement.
 - Do NOT use fetch, XMLHttpRequest, importScripts, or any network/DOM APIs.`;

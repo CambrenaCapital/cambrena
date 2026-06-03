@@ -2,7 +2,6 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Linkedin } from 'lucide-react';
 import logo from '@/assets/cambrena-logo.svg';
-import ApiKeyScreen from '@/components/explorer/ApiKeyScreen';
 import ChatPanel, { ChatMessage } from '@/components/explorer/ChatPanel';
 import OutputPanel from '@/components/explorer/OutputPanel';
 import { loadDataset, DataRow, loadTokenDataset, TokenRow } from '@/lib/parseDataset';
@@ -16,9 +15,7 @@ let msgId = 0;
 const nextId = () => String(++msgId);
 
 const VCExitsExplorer = () => {
-  const [apiKey, setApiKey] = useState<string | null>(null);
   const [model, setModel] = useState('claude-sonnet-4-20250514');
-  const [authError, setAuthError] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentResult, setCurrentResult] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -76,13 +73,8 @@ const VCExitsExplorer = () => {
     });
   }, [datasetType]);
 
-  const handleConnect = (key: string) => {
-    setAuthError(null);
-    setApiKey(key);
-  };
-
   const handleSend = useCallback(async (text: string) => {
-    if (!apiKey || isLoading) return;
+    if (isLoading) return;
 
     const userMsg: ChatMessage = { id: nextId(), role: 'user', content: text };
     setMessages((prev) => [...prev, userMsg]);
@@ -98,7 +90,6 @@ const VCExitsExplorer = () => {
       if (liveData && mcpClientRef.current?.isConnected && mcpToolsRef.current.length > 0) {
         const mcpClient = mcpClientRef.current;
         rawResponse = await sendMessageWithTools(
-          apiKey,
           conversationRef.current,
           activePrompt,
           model,
@@ -106,7 +97,7 @@ const VCExitsExplorer = () => {
           async (name, input) => mcpClient.callTool(name, input),
         );
       } else {
-        rawResponse = await sendMessage(apiKey, conversationRef.current, activePrompt, model);
+        rawResponse = await sendMessage(conversationRef.current, activePrompt, model);
       }
 
       let parsed: any;
@@ -164,21 +155,13 @@ const VCExitsExplorer = () => {
       }
     } catch (err: any) {
       const apiErr = err as ApiError;
-      if (apiErr.status === 401) {
-        setApiKey(null);
-        setAuthError(apiErr.message);
-        setMessages([]);
-        setCurrentResult(null);
-        conversationRef.current = [];
-      } else {
-        const errorText = apiErr.message || 'An unexpected error occurred';
-        setMessages((prev) => [...prev, { id: nextId(), role: 'assistant', content: errorText, title: 'Error', explanation: errorText, isError: true }]);
-        setCurrentResult({ type: 'error', title: 'API Error', error: errorText });
-      }
+      const errorText = apiErr.message || 'An unexpected error occurred';
+      setMessages((prev) => [...prev, { id: nextId(), role: 'assistant', content: errorText, title: 'Error', explanation: errorText, isError: true }]);
+      setCurrentResult({ type: 'error', title: 'API Error', error: errorText });
     } finally {
       setIsLoading(false);
     }
-  }, [apiKey, model, isLoading, executeCode, datasetType, liveData]);
+  }, [model, isLoading, executeCode, datasetType, liveData]);
 
   const handleClear = () => {
     setMessages([]);
@@ -187,7 +170,6 @@ const VCExitsExplorer = () => {
   };
 
   const handleDisconnect = () => {
-    setApiKey(null);
     setMessages([]);
     setCurrentResult(null);
     conversationRef.current = [];
@@ -265,9 +247,7 @@ const VCExitsExplorer = () => {
 
       {/* Main content area */}
       <main className="absolute inset-0 top-20 bottom-10 sm:top-24 sm:bottom-12 md:top-32 md:bottom-14 mx-4 sm:mx-8 md:mx-16 z-10">
-        {!apiKey ? (
-          <ApiKeyScreen onConnect={handleConnect} error={authError} />
-        ) : datasetLoading ? (
+        {datasetLoading ? (
           <div className="h-full flex items-center justify-center">
             <div className="text-center">
               <div className="w-8 h-8 border-2 border-foreground border-t-transparent rounded-full animate-spin mx-auto mb-3" />

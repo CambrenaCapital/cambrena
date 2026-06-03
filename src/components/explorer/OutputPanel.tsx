@@ -11,9 +11,8 @@ interface Props {
 
 const EQUITY_SUGGESTED = [
   'Exit count by year as a line chart',
-  'Sector value share over decades as area chart in %',
   'Time to exit distribution',
-  'Exit value share by region over time (%) as area chart',
+  'Median exit valuation over time',
   'Top 25 verticals comparison by exit number, median valuation, amount raised and exit volume',
 ];
 

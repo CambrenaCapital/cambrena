@@ -8,7 +8,6 @@ export interface ApiError {
 }
 
 export async function sendMessage(
-  apiKey: string,
   messages: Array<{ role: string; content: string }>,
   systemPrompt: string,
   model: string = 'claude-sonnet-4-20250514'
@@ -17,7 +16,6 @@ export async function sendMessage(
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'X-Api-Key': apiKey,
     },
     body: JSON.stringify({
       model,
@@ -45,7 +43,6 @@ export async function sendMessage(
 export type ToolExecutor = (name: string, input: Record<string, any>) => Promise<string>;
 
 export async function sendMessageWithTools(
-  apiKey: string,
   messages: Array<{ role: string; content: any }>,
   systemPrompt: string,
   model: string,
@@ -60,7 +57,6 @@ export async function sendMessageWithTools(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Api-Key': apiKey,
       },
       body: JSON.stringify({
         model,
