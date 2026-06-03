@@ -1,6 +1,6 @@
 import type { AnthropicTool } from './mcpClient';
 
-const PROXY_URL = import.meta.env.VITE_PROXY_URL || 'https://cambrena-proxy.cambrena.workers.dev';
+const PROXY_URL = import.meta.env.VITE_PROXY_URL || 'https://cambrena-proxy.bastian-wetzel.workers.dev';
 
 export interface ApiError {
   status: number;
