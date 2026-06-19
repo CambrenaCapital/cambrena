@@ -1,0 +1,115 @@
+import { Link, useParams } from "react-router-dom";
+import ReactMarkdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
+import WritingLayout from "@/components/WritingLayout";
+import rehypeFigureCaptions from "@/lib/figureCaptions";
+import { getPostBySlug, formatDate, resolveAsset } from "@/lib/posts";
+import { useDocumentMeta } from "@/lib/useDocumentMeta";
+
+const components: Components = {
+  h1: ({ node, ...props }) => (
+    <h1 className="text-2xl sm:text-3xl font-bold tracking-tight leading-tight mt-2 mb-6" {...props} />
+  ),
+  h2: ({ node, ...props }) => (
+    <h2 className="text-xl sm:text-2xl font-bold tracking-tight mt-10 mb-3" {...props} />
+  ),
+  h3: ({ node, ...props }) => (
+    <h3 className="text-base sm:text-lg font-bold tracking-tight mt-6 mb-2" {...props} />
+  ),
+  p: ({ node, ...props }) => (
+    <p className="text-sm sm:text-base leading-relaxed text-foreground/90 mb-4" {...props} />
+  ),
+  a: ({ node, href, ...props }) => {
+    const external = /^https?:\/\//.test(href ?? "");
+    return (
+      <a
+        href={href}
+        className="underline underline-offset-2 hover:opacity-60 transition-opacity"
+        {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        {...props}
+      />
+    );
+  },
+  ul: ({ node, ...props }) => (
+    <ul className="list-disc pl-6 space-y-2 mb-4 text-sm sm:text-base leading-relaxed text-foreground/90" {...props} />
+  ),
+  ol: ({ node, ...props }) => (
+    <ol className="list-decimal pl-6 space-y-2 mb-4 text-sm sm:text-base leading-relaxed text-foreground/90" {...props} />
+  ),
+  blockquote: ({ node, ...props }) => (
+    <blockquote className="border-l-2 border-foreground/40 pl-4 italic text-foreground/80 my-6" {...props} />
+  ),
+  hr: ({ node, ...props }) => <hr className="my-8 border-border/40" {...props} />,
+  code: ({ node, ...props }) => (
+    <code className="font-mono text-[0.9em] bg-secondary/60 px-1 py-0.5" {...props} />
+  ),
+  img: ({ node, src, alt, ...props }) => (
+    <img
+      src={resolveAsset(typeof src === "string" ? src : "")}
+      alt={alt ?? ""}
+      loading="lazy"
+      className="w-full h-auto"
+      {...props}
+    />
+  ),
+  figure: ({ node, ...props }) => <figure className="my-8" {...props} />,
+  figcaption: ({ node, ...props }) => (
+    <figcaption
+      className="mt-2 text-xs sm:text-sm italic text-muted-foreground text-center [&_a]:underline"
+      {...props}
+    />
+  ),
+};
+
+const WritingArticle = () => {
+  const { slug } = useParams();
+  const post = slug ? getPostBySlug(slug) : undefined;
+
+  useDocumentMeta({
+    title: post ? `${post.title} | Cambrena Capital` : "Writing | Cambrena Capital",
+    description: post?.excerpt,
+    image:
+      post?.coverImage && typeof window !== "undefined"
+        ? `${window.location.origin}${post.coverImage}`
+        : undefined,
+  });
+
+  if (!post) {
+    return (
+      <WritingLayout>
+        <div className="max-w-2xl mx-auto">
+          <h1 className="text-xl sm:text-2xl font-bold mb-4">Post not found</h1>
+          <Link to="/writing" className="text-sm underline hover:opacity-60 transition-opacity">
+            ← Writing
+          </Link>
+        </div>
+      </WritingLayout>
+    );
+  }
+
+  return (
+    <WritingLayout>
+      <article className="max-w-2xl mx-auto">
+        <Link
+          to="/writing"
+          className="inline-block text-xs font-bold tracking-wider hover:opacity-60 transition-opacity mb-6"
+        >
+          ← Writing
+        </Link>
+        <p className="text-xs text-muted-foreground tracking-wider mb-3">
+          {formatDate(post.date)}
+          {post.author ? ` · ${post.author}` : ""}
+        </p>
+        <ReactMarkdown
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeFigureCaptions]}
+          components={components}
+        >
+          {post.body}
+        </ReactMarkdown>
+      </article>
+    </WritingLayout>
+  );
+};
+
+export default WritingArticle;
