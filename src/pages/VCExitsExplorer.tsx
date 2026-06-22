@@ -241,7 +241,7 @@ const VCExitsExplorer = () => {
           Exit Explorer
         </Link>
         <Link to="/writing" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          Writing
+          Musings
         </Link>
         <Link to="/about-us" className="hover:opacity-60 transition-opacity whitespace-nowrap">
           About Us

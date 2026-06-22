@@ -5,13 +5,13 @@ import { useDocumentMeta } from "@/lib/useDocumentMeta";
 
 const Writing = () => {
   useDocumentMeta({
-    title: "Writing | Cambrena Capital",
+    title: "Musings | Cambrena Capital",
     description: "Essays and research from Cambrena Capital.",
   });
 
   return (
     <WritingLayout>
-      <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">Writing</h1>
+      <h1 className="text-xl sm:text-2xl font-bold mb-6 sm:mb-8">Musings</h1>
 
       <div className="space-y-6 sm:space-y-8">
         {posts.map((post) => (

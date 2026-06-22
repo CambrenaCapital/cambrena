@@ -66,7 +66,7 @@ const WritingArticle = () => {
   const post = slug ? getPostBySlug(slug) : undefined;
 
   useDocumentMeta({
-    title: post ? `${post.title} | Cambrena Capital` : "Writing | Cambrena Capital",
+    title: post ? `${post.title} | Cambrena Capital` : "Musings | Cambrena Capital",
     description: post?.excerpt,
     image:
       post?.coverImage && typeof window !== "undefined"
@@ -80,7 +80,7 @@ const WritingArticle = () => {
         <div className="max-w-2xl mx-auto">
           <h1 className="text-xl sm:text-2xl font-bold mb-4">Post not found</h1>
           <Link to="/writing" className="text-sm underline hover:opacity-60 transition-opacity">
-            ← Writing
+            ← Musings
           </Link>
         </div>
       </WritingLayout>
@@ -94,7 +94,7 @@ const WritingArticle = () => {
           to="/writing"
           className="inline-block text-xs font-bold tracking-wider hover:opacity-60 transition-opacity mb-6"
         >
-          ← Writing
+          ← Musings
         </Link>
         <p className="text-xs text-muted-foreground tracking-wider mb-3">
           {formatDate(post.date)}
