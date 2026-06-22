@@ -79,7 +79,7 @@ const WritingArticle = () => {
       <WritingLayout>
         <div className="max-w-2xl mx-auto">
           <h1 className="text-xl sm:text-2xl font-bold mb-4">Post not found</h1>
-          <Link to="/writing" className="text-sm underline hover:opacity-60 transition-opacity">
+          <Link to="/musings" className="text-sm underline hover:opacity-60 transition-opacity">
             ← Musings
           </Link>
         </div>
@@ -91,7 +91,7 @@ const WritingArticle = () => {
     <WritingLayout>
       <article className="max-w-2xl mx-auto">
         <Link
-          to="/writing"
+          to="/musings"
           className="inline-block text-xs font-bold tracking-wider hover:opacity-60 transition-opacity mb-6"
         >
           ← Musings

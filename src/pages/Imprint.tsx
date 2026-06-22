@@ -19,7 +19,7 @@ const Imprint = () => {
         <Link to="/vc-exits-explorer" className="hover:opacity-60 transition-opacity whitespace-nowrap">
           Exit Explorer
         </Link>
-        <Link to="/writing" className="hover:opacity-60 transition-opacity whitespace-nowrap">
+        <Link to="/musings" className="hover:opacity-60 transition-opacity whitespace-nowrap">
           Musings
         </Link>
         <Link to="/about-us" className="hover:opacity-60 transition-opacity whitespace-nowrap">

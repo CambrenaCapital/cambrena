@@ -22,8 +22,8 @@ const App = () => (
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/vc-exits-explorer" element={<VCExitsExplorer />} />
-        <Route path="/writing" element={<Writing />} />
-        <Route path="/writing/:slug" element={<WritingArticle />} />
+        <Route path="/musings" element={<Writing />} />
+        <Route path="/musings/:slug" element={<WritingArticle />} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<NotFound />} />
       </Routes>

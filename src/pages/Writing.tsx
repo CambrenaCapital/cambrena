@@ -17,7 +17,7 @@ const Writing = () => {
         {posts.map((post) => (
           <Link
             key={post.slug}
-            to={`/writing/${post.slug}`}
+            to={`/musings/${post.slug}`}
             className="block rounded-xl border border-border/30 bg-white/60 p-5 sm:p-6 transition-all duration-200 hover:border-foreground/30 hover:shadow-md hover:-translate-y-0.5"
           >
             <p className="text-xs text-muted-foreground tracking-wider mb-2">
