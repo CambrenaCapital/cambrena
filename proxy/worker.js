@@ -6,12 +6,18 @@ const ALLOWED_ORIGINS = [
   'https://cambrena.net',
   'https://www.cambrena.net',
   'https://cambrenacapital.github.io',
-  'http://localhost:8080',
-  'http://localhost:5173',
 ];
 
+// Allow any localhost / 127.0.0.1 origin on any port (local dev — Vite may pick
+// a fallback port like 8081 when its configured port is busy).
+const LOCALHOST_RE = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
+
+function isAllowedOrigin(origin) {
+  return ALLOWED_ORIGINS.includes(origin) || LOCALHOST_RE.test(origin);
+}
+
 function corsHeaders(origin) {
-  const allowed = ALLOWED_ORIGINS.includes(origin) ? origin : ALLOWED_ORIGINS[0];
+  const allowed = isAllowedOrigin(origin) ? origin : ALLOWED_ORIGINS[0];
   return {
     'Access-Control-Allow-Origin': allowed,
     'Access-Control-Allow-Methods': 'POST, DELETE, OPTIONS',

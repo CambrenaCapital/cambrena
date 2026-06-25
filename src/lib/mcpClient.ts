@@ -1,4 +1,4 @@
-const PROXY_URL = import.meta.env.VITE_PROXY_URL || 'https://cambrena-proxy.cambrena.workers.dev';
+const PROXY_URL = import.meta.env.VITE_PROXY_URL || 'https://cambrena-proxy.bastian-wetzel.workers.dev';
 const MCP_ENDPOINT = `${PROXY_URL}/mcp`;
 
 export interface McpTool {

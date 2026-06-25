@@ -10,7 +10,7 @@ export interface ApiError {
 export async function sendMessage(
   messages: Array<{ role: string; content: string }>,
   systemPrompt: string,
-  model: string = 'claude-sonnet-4-20250514'
+  model: string = 'claude-sonnet-4-6'
 ): Promise<string> {
   const response = await fetch(PROXY_URL, {
     method: 'POST',

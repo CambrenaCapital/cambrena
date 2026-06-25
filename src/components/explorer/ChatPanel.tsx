@@ -7,9 +7,9 @@ import type { DatasetType } from '@/lib/types';
 import coingeckoIcon from '@/assets/coingecko-icon.svg';
 
 export const MODELS = [
-  { id: 'claude-haiku-4-5-20251001', label: 'Haiku 4.5' },
-  { id: 'claude-sonnet-4-20250514', label: 'Sonnet 4.6' },
-  { id: 'claude-opus-4-20250514', label: 'Opus 4.7' },
+  { id: 'claude-haiku-4-5', label: 'Haiku 4.5' },
+  { id: 'claude-sonnet-4-6', label: 'Sonnet 4.6' },
+  { id: 'claude-opus-4-8', label: 'Opus 4.8' },
 ] as const;
 
 export interface ChatMessage {

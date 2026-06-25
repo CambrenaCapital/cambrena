@@ -15,7 +15,7 @@ let msgId = 0;
 const nextId = () => String(++msgId);
 
 const VCExitsExplorer = () => {
-  const [model, setModel] = useState('claude-sonnet-4-20250514');
+  const [model, setModel] = useState('claude-sonnet-4-6');
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [currentResult, setCurrentResult] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
