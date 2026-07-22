@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
-import { Linkedin } from 'lucide-react';
-import logo from '@/assets/cambrena-logo.svg';
+import SiteHeader from '@/components/SiteHeader';
+import SiteFooter from '@/components/SiteFooter';
 import ChatPanel, { ChatMessage } from '@/components/explorer/ChatPanel';
 import OutputPanel from '@/components/explorer/OutputPanel';
 import { loadDataset, DataRow, loadTokenDataset, TokenRow } from '@/lib/parseDataset';
@@ -23,6 +22,8 @@ const VCExitsExplorer = () => {
   const [datasetType, setDatasetType] = useState<DatasetType>('equity');
   const [liveData, setLiveData] = useState(false);
   const [liveDataConnecting, setLiveDataConnecting] = useState(false);
+  // Mobile-only: which pane is visible (desktop shows both side by side).
+  const [mobileTab, setMobileTab] = useState<'chat' | 'results'>('chat');
 
   const equityDataRef = useRef<DataRow[]>([]);
   const tokenDataRef = useRef<TokenRow[]>([]);
@@ -55,6 +56,11 @@ const VCExitsExplorer = () => {
       mcpClientRef.current?.disconnect();
     };
   }, []);
+
+  // On mobile, surface the answer as soon as it arrives.
+  useEffect(() => {
+    if (currentResult) setMobileTab('results');
+  }, [currentResult]);
 
   const executeCode = useCallback((code: string): Promise<any> => {
     return new Promise((resolve, reject) => {
@@ -224,29 +230,8 @@ const VCExitsExplorer = () => {
   };
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative bg-background">
-      {/* Logo */}
-      <Link to="/" className="absolute top-6 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16 hover:opacity-80 transition-opacity z-20">
-        <img
-          src={logo}
-          alt="Cambrena Capital Logo"
-          className="h-12 sm:h-14 md:h-16 object-contain"
-        />
-      </Link>
-
-      {/* Top-right nav */}
-      {/* Top Right Nav */}
-      <div className="absolute top-6 right-4 sm:top-8 sm:right-8 md:top-12 md:right-16 flex items-center gap-4 sm:gap-6 text-xs font-bold tracking-wider z-20">
-        <Link to="/vc-exits-explorer" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          Exit Explorer
-        </Link>
-        <Link to="/musings" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          Musings
-        </Link>
-        <Link to="/about-us" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          About Us
-        </Link>
-      </div>
+    <div className="h-[100dvh] w-full overflow-hidden relative bg-background">
+      <SiteHeader logoClassName="h-12 sm:h-14 md:h-16" />
 
       {/* Main content area */}
       <main className="absolute inset-0 top-20 bottom-10 sm:top-24 sm:bottom-12 md:top-32 md:bottom-14 mx-4 sm:mx-8 md:mx-16 z-10">
@@ -258,66 +243,58 @@ const VCExitsExplorer = () => {
             </div>
           </div>
         ) : (
-          <div className="h-full flex flex-col md:flex-row gap-3 md:gap-4">
-            <div className="w-full md:w-[40%] h-[50%] md:h-full flex-shrink-0 border border-border/30 rounded-xl bg-white/30 overflow-hidden">
-              <ChatPanel
-                messages={messages}
-                onSend={handleSend}
-                isLoading={isLoading}
-                model={model}
-                onModelChange={setModel}
-                onClear={handleClear}
-                onDisconnect={handleDisconnect}
-                datasetType={datasetType}
-                onDatasetTypeChange={handleDatasetTypeChange}
-                liveData={liveData}
-                onLiveDataChange={handleLiveDataChange}
-                liveDataConnecting={liveDataConnecting}
-              />
+          <div className="h-full flex flex-col gap-3 md:gap-4">
+            {/* Mobile pane toggle */}
+            <div className="md:hidden flex-shrink-0 grid grid-cols-2 gap-1 p-1 rounded-xl border border-border/30 bg-white/30">
+              <button
+                onClick={() => setMobileTab('chat')}
+                className={`h-11 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
+                  mobileTab === 'chat' ? 'bg-foreground text-primary-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                Chat
+              </button>
+              <button
+                onClick={() => setMobileTab('results')}
+                className={`h-11 rounded-lg text-xs font-semibold tracking-wide transition-colors ${
+                  mobileTab === 'results' ? 'bg-foreground text-primary-foreground' : 'text-muted-foreground'
+                }`}
+              >
+                Results
+              </button>
             </div>
-            <div className="flex-1 h-[50%] md:h-full overflow-hidden border border-border/30 rounded-xl bg-white/30">
-              <OutputPanel
-                result={currentResult}
-                isLoading={isLoading}
-                onSuggestedQuestion={handleSend}
-                datasetType={datasetType}
-              />
+
+            <div className="flex-1 min-h-0 flex flex-col md:flex-row gap-3 md:gap-4">
+              <div className={`${mobileTab === 'chat' ? 'block' : 'hidden'} md:block w-full md:w-[40%] flex-1 md:flex-none min-h-0 md:h-full flex-shrink-0 border border-border/30 rounded-xl bg-white/30 overflow-hidden`}>
+                <ChatPanel
+                  messages={messages}
+                  onSend={handleSend}
+                  isLoading={isLoading}
+                  model={model}
+                  onModelChange={setModel}
+                  onClear={handleClear}
+                  onDisconnect={handleDisconnect}
+                  datasetType={datasetType}
+                  onDatasetTypeChange={handleDatasetTypeChange}
+                  liveData={liveData}
+                  onLiveDataChange={handleLiveDataChange}
+                  liveDataConnecting={liveDataConnecting}
+                />
+              </div>
+              <div className={`${mobileTab === 'results' ? 'block' : 'hidden'} md:block flex-1 min-h-0 md:h-full overflow-hidden border border-border/30 rounded-xl bg-white/30`}>
+                <OutputPanel
+                  result={currentResult}
+                  isLoading={isLoading}
+                  onSuggestedQuestion={handleSend}
+                  datasetType={datasetType}
+                />
+              </div>
             </div>
           </div>
         )}
       </main>
 
-      {/* Footer */}
-      <footer className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4 z-20">
-        <nav aria-label="Footer navigation">
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
-            <Link to="/imprint" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-              Imprint
-            </Link>
-            <span className="hidden sm:inline">|</span>
-            <Link to="/privacy-policy" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-              Privacy Policy
-            </Link>
-            <span className="hidden sm:inline">|</span>
-            <a
-              href="mailto:contact@cambrena.net"
-              className="hover:opacity-60 transition-opacity"
-            >
-              contact@cambrena.net
-            </a>
-            <span className="hidden sm:inline">|</span>
-            <a
-              href="https://www.linkedin.com/company/cambrena-capital/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:opacity-60 transition-opacity"
-              aria-label="LinkedIn"
-            >
-              <Linkedin size={16} />
-            </a>
-          </div>
-        </nav>
-      </footer>
+      <SiteFooter className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4 z-20" />
     </div>
   );
 };

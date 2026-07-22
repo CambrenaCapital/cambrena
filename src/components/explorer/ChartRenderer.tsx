@@ -7,6 +7,7 @@ import {
   ScatterChart, Scatter,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 interface SeriesConfig {
   key: string;
@@ -57,6 +58,8 @@ function formatTick(value: number, unit?: string): string {
 
 const ChartRenderer = ({ data, config }: Props) => {
   const { chartType, xKey, series = [], yLabel, yUnit, layout, stacked } = config;
+  const isMobile = useIsMobile();
+  const chartHeight = isMobile ? 280 : 400;
   // Line and area charts should always be horizontal (time on x-axis)
   const isVertical = layout === 'vertical' && chartType === 'bar';
 
@@ -77,7 +80,7 @@ const ChartRenderer = ({ data, config }: Props) => {
     const nameKey = xKey;
     const valueKey = series[0]?.key || 'value';
     return (
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={chartHeight}>
         <PieChart>
           <Pie
             data={data}
@@ -85,8 +88,8 @@ const ChartRenderer = ({ data, config }: Props) => {
             nameKey={nameKey}
             cx="50%"
             cy="50%"
-            outerRadius={150}
-            label={({ name, value }) => `${name}: ${formatValue(value, yUnit)}`}
+            outerRadius={isMobile ? 90 : 150}
+            label={isMobile ? false : ({ name, value }) => `${name}: ${formatValue(value, yUnit)}`}
           >
             {data.map((_, i) => (
               <Cell key={i} fill={COLORS[i % COLORS.length]} />
@@ -103,7 +106,7 @@ const ChartRenderer = ({ data, config }: Props) => {
     const xField = xKey;
     const yField = series[0]?.key || 'value';
     return (
-      <ResponsiveContainer width="100%" height={400}>
+      <ResponsiveContainer width="100%" height={chartHeight}>
         <ScatterChart margin={{ top: 10, right: 30, bottom: bottomMargin, left: leftMargin }}>
           <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
           <XAxis dataKey={xField} name={yLabel || xField} type="number" />
@@ -124,7 +127,7 @@ const ChartRenderer = ({ data, config }: Props) => {
   const ChartComponent = chartType === 'line' ? LineChart : chartType === 'area' ? AreaChart : BarChart;
 
   return (
-    <ResponsiveContainer width="100%" height={400}>
+    <ResponsiveContainer width="100%" height={chartHeight}>
       <ChartComponent
         data={data}
         layout={isVertical ? 'vertical' : 'horizontal'}
@@ -133,7 +136,7 @@ const ChartRenderer = ({ data, config }: Props) => {
         <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
         {isVertical ? (
           <>
-            <YAxis dataKey={xKey} type="category" width={120} tick={{ fontSize: 12 }} />
+            <YAxis dataKey={xKey} type="category" width={isMobile ? 78 : 120} tick={{ fontSize: 12 }} />
             <XAxis type="number" tickFormatter={yTickFormatter} />
           </>
         ) : (

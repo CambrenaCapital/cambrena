@@ -95,7 +95,7 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
         </div>
 
         {/* Actions row */}
-        <div className="flex items-center justify-end px-4 py-1.5 gap-2">
+        <div className="flex flex-wrap items-center justify-end px-4 py-1.5 gap-x-2 gap-y-1">
           {datasetType === 'token' && (
             <button
               onClick={() => !liveDataConnecting && onLiveDataChange(!liveData)}
@@ -346,7 +346,7 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-1 px-2.5 py-2.5 rounded-lg border border-border/50 text-xs hover:opacity-70 transition-opacity whitespace-nowrap bg-white/60"
+              className="flex items-center gap-1 px-2.5 h-11 rounded-lg border border-border/50 text-xs hover:opacity-70 transition-opacity whitespace-nowrap bg-white/60"
             >
               {currentModel.label}
               <ChevronDown size={12} className={`opacity-50 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
@@ -377,13 +377,14 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
             onChange={(e) => setInput(e.target.value)}
             placeholder={datasetType === 'equity' ? 'Ask about the VC exits dataset...' : 'Ask about the token listings dataset...'}
             disabled={isLoading}
-            className="flex-1 px-4 py-2.5 rounded-lg border border-border/50 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent bg-white/80 placeholder-muted-foreground disabled:opacity-50"
+            className="flex-1 min-w-0 px-4 h-11 rounded-lg border border-border/50 text-sm focus:outline-none focus:ring-2 focus:ring-foreground/20 focus:border-transparent bg-white/80 placeholder-muted-foreground disabled:opacity-50"
             autoFocus
           />
           <button
             type="submit"
             disabled={!input.trim() || isLoading}
-            className="p-2.5 rounded-lg bg-foreground text-primary-foreground hover:opacity-80 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
+            aria-label="Send"
+            className="flex items-center justify-center h-11 w-11 flex-shrink-0 rounded-lg bg-foreground text-primary-foreground hover:opacity-80 transition-opacity disabled:opacity-30 disabled:cursor-not-allowed"
           >
             <Send size={16} />
           </button>

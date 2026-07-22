@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import TriangleAccent from "@/components/TriangleAccent";
 import logo from "@/assets/cambrena-logo.gif";
-import { Linkedin } from "lucide-react";
-import { Link } from "react-router-dom";
+import SiteHeader from "@/components/SiteHeader";
+import SiteFooter from "@/components/SiteFooter";
 
 const Index = () => {
   const [animationComplete, setAnimationComplete] = useState(false);
@@ -16,10 +15,10 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen overflow-hidden relative flex items-center justify-center bg-background">
-      {/* Logo */}
+    <div className="min-h-[100svh] w-full overflow-hidden relative flex items-center justify-center bg-background">
+      {/* Animated logo (center → corner) */}
       <div
-        className={`absolute transition-all duration-[1500ms] ease-in-out ${
+        className={`absolute z-30 transition-all duration-[1500ms] ease-in-out ${
           animationComplete
             ? 'top-6 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16 scale-100'
             : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-200'
@@ -32,19 +31,13 @@ const Index = () => {
         />
       </div>
 
-      {/* Top Right Nav */}
-      <div className={`absolute top-6 right-4 sm:top-8 sm:right-8 md:top-12 md:right-16 flex items-center gap-4 sm:gap-6 text-xs font-bold tracking-wider transition-all duration-700 ${
-        animationComplete ? 'opacity-100' : 'opacity-0'
-      }`}>
-        <Link to="/vc-exits-explorer" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          Exit Explorer
-        </Link>
-        <Link to="/musings" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          Musings
-        </Link>
-        <Link to="/about-us" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-          About Us
-        </Link>
+      {/* Nav / hamburger — fades in after the logo animation */}
+      <div
+        className={`transition-opacity duration-700 ${
+          animationComplete ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+      >
+        <SiteHeader showLogo={false} />
       </div>
 
       {/* Main Content */}
@@ -69,41 +62,11 @@ const Index = () => {
         </p>
       </main>
 
-      {/* Footer Links */}
-      <footer
+      <SiteFooter
         className={`absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4 transition-opacity duration-700 ${
           animationComplete ? 'opacity-100' : 'opacity-0'
         }`}
-      >
-        <nav aria-label="Footer navigation">
-          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 text-xs tracking-wider">
-          <Link to="/imprint" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-            Imprint
-          </Link>
-          <span className="hidden sm:inline">|</span>
-          <Link to="/privacy-policy" className="hover:opacity-60 transition-opacity whitespace-nowrap">
-            Privacy Policy
-          </Link>
-          <span className="hidden sm:inline">|</span>
-          <a
-            href="mailto:contact@cambrena.net"
-            className="hover:opacity-60 transition-opacity"
-          >
-            contact@cambrena.net
-          </a>
-          <span className="hidden sm:inline">|</span>
-          <a
-            href="https://www.linkedin.com/company/cambrena-capital/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:opacity-60 transition-opacity"
-            aria-label="LinkedIn"
-          >
-            <Linkedin size={16} />
-          </a>
-          </div>
-        </nav>
-      </footer>
+      />
     </div>
   );
 };
