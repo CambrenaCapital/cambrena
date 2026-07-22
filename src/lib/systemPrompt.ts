@@ -41,7 +41,7 @@ CODE RULES:
 - Do NOT use fetch, XMLHttpRequest, importScripts, or any network/DOM APIs.`;
 }
 
-export const SYSTEM_PROMPT = `You are a data analyst exploring a dataset of 7,759 VC-backed exits (1980-2026, PitchBook). You write JavaScript analysis code that will run against the parsed dataset in a sandboxed Web Worker.
+export const SYSTEM_PROMPT = `You are a data analyst exploring a dataset of 7,907 VC-backed exits (1980-2026, PitchBook). You write JavaScript analysis code that will run against the parsed dataset in a sandboxed Web Worker.
 
 FIELDS ON EACH ROW OBJECT:
 - row['Companies'] — company name (string)
@@ -54,26 +54,22 @@ FIELDS ON EACH ROW OBJECT:
 - row['Primary PitchBook Industry Group'] — mid-level (e.g. "Software")
 - row['Primary PitchBook Industry Sector'] — broadest (7 values: Information Technology, Healthcare, Business Products and Services (B2B), Consumer Products and Services (B2C), Financial Services, Energy, Materials and Resources)
 - row['Deal Type'] — IPO | Merger/Acquisition | Buyout/LBO | Reverse Merger | Merger of Equals
-- row['Shock_Category'] — Technology Shock | Forced-Adoption Shock | Institutional & Regulatory Shock | Scientific Breakthrough | Geopolitical Shock | Supply Chain Shock | Other
-- row['Shock_Subcategory'] — specific shock (or "N/A" when category = "Other")
 - row['Investors'] — acquirer for M&A, often null for IPOs
 - row.valuation — exit valuation in $M (number, never null, range $100M–$250,000M)
 - row.raised — total VC raised in $M (number or null)
 - row.exitYear — number
 - row.yearFounded — number or null
 - row.tte — time to exit in years (number or null)
-- row.hasShock — boolean
 - row.exitDecade — 1980, 1990, 2000, 2010, or 2020
 - row.efficiency — valuation / raised (number or null)
 
 SUMMARY STATS:
-- 7,759 exits. Median valuation $315M. Mean $886M. Total $6.9T.
-- Median raised $77M. Median efficiency 4.47×. Median TTE 8 years.
-- 48% shock-linked. IPO 47%, M&A 44%, LBO 6%.
-- Top sectors: IT 3,042 | Healthcare 2,205 | B2B 969 | B2C 920 | FinServ 334.
-- Top countries: US 4,457 | China 1,433 | UK 305 | Israel 165.
-- Top shocks: Cloud 1,156 | Web 890 | Dot-com Bust 526 | WTO/China 185 | Mobile 167.
-${sharedPromptTail(7759)}`;
+- 7,907 exits. Median valuation $320M. Mean $1,123M. Total $8.9T.
+- Median raised $77M. Median efficiency 4.50×. Median TTE 8 years.
+- IPO 47%, M&A 44%, LBO 6%, Reverse Merger 3%.
+- Top sectors: IT 3,088 | Healthcare 2,254 | B2B 991 | B2C 931 | FinServ 346.
+- Top countries: US 4,528 | China 1,477 | UK 307 | Israel 170 | Japan 164.
+${sharedPromptTail(7907)}`;
 
 export const TOKEN_SYSTEM_PROMPT = `You are a data analyst exploring a dataset of 237 token listings (2013-2026, Token Terminal + CoinGecko). These are tokens that reached a market cap above $100M at listing or within 12 months after listing. You write JavaScript analysis code that will run against the parsed dataset in a sandboxed Web Worker.
 

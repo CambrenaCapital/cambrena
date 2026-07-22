@@ -32,14 +32,13 @@ export interface DataRow {
   exitYear: number;
   yearFounded: number | null;
   tte: number | null;
-  hasShock: boolean;
   exitDecade: number;
   verticalList: string[];
   efficiency: number | null;
 }
 
 export async function loadDataset(): Promise<DataRow[]> {
-  const url = `${import.meta.env.BASE_URL}data/VC_Backed_Exits_Classified.csv`;
+  const url = `${import.meta.env.BASE_URL}data/VC_Backed_Exits_July.csv`;
   const response = await fetch(url);
   const text = await response.text();
 
@@ -59,7 +58,6 @@ export async function loadDataset(): Promise<DataRow[]> {
           const yearFounded = parseNumOrNull(raw['Year Founded']);
           const tteRaw = raw['Time to Exit']?.trim();
           const tte = tteRaw === '-' || tteRaw === '' ? null : parseNumOrNull(raw['Time to Exit']);
-          const hasShock = raw['Shock_Category'] !== 'Other';
           const exitDecade = Math.floor(exitYear / 10) * 10;
           const verticalList = raw['Verticals']
             ? raw['Verticals'].split(',').map(v => v.trim()).filter(Boolean)
@@ -73,7 +71,6 @@ export async function loadDataset(): Promise<DataRow[]> {
             exitYear,
             yearFounded,
             tte,
-            hasShock,
             exitDecade,
             verticalList,
             efficiency,

@@ -151,11 +151,11 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
                       <div className="text-muted-foreground">Period</div>
                       <div className="font-medium">1980 &ndash; 2026</div>
                       <div className="text-muted-foreground">Total exits</div>
-                      <div className="font-medium">7,759</div>
+                      <div className="font-medium">7,907</div>
                       <div className="text-muted-foreground">Minimum valuation</div>
                       <div className="font-medium">$100M</div>
                       <div className="text-muted-foreground">Total exit value</div>
-                      <div className="font-medium">~$6.9 trillion</div>
+                      <div className="font-medium">~$8.9 trillion</div>
                     </div>
 
                     <div>
@@ -176,20 +176,17 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
                         <Field name="Time to Exit" desc="Years from founding to exit" />
                         <Field name="Year Founded" desc="Company founding year" />
                         <Field name="Investors" desc="Key investors / acquirer" />
-                        <Field name="Shock Category" desc="Macro shock catalyst (if any)" />
-                        <Field name="Shock Subcategory" desc="Specific shock (e.g. Cloud, Mobile)" />
                       </div>
                     </div>
 
                     <div>
                       <h4 className="font-semibold mb-2">Key Statistics</h4>
                       <div className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-1.5">
-                        <Stat label="Median valuation" value="$315M" />
-                        <Stat label="Mean valuation" value="$886M" />
+                        <Stat label="Median valuation" value="$320M" />
+                        <Stat label="Mean valuation" value="$1,123M" />
                         <Stat label="Median raised" value="$77M" />
-                        <Stat label="Median efficiency" value="4.47x" />
+                        <Stat label="Median efficiency" value="4.50x" />
                         <Stat label="Median time to exit" value="8 years" />
-                        <Stat label="Shock-linked" value="48%" />
                       </div>
                     </div>
 
@@ -199,9 +196,9 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
                         <Stat label="IPO" value="47%" />
                         <Stat label="M&A" value="44%" />
                         <Stat label="Buyout/LBO" value="6%" />
-                        <Stat label="Top country: US" value="4,457 exits" />
-                        <Stat label="China" value="1,433 exits" />
-                        <Stat label="UK" value="305 exits" />
+                        <Stat label="Top country: US" value="4,528 exits" />
+                        <Stat label="China" value="1,477 exits" />
+                        <Stat label="UK" value="307 exits" />
                       </div>
                     </div>
                   </div>
@@ -297,7 +294,7 @@ const ChatPanel = ({ messages, onSend, isLoading, model, onModelChange, onClear,
           <div className="text-center text-muted-foreground text-sm mt-8">
             <p className="mb-2">
               {datasetType === 'equity'
-                ? 'Ask a question about 7,759 VC-backed exits'
+                ? 'Ask a question about 7,907 VC-backed exits'
                 : 'Ask a question about 237 token listings'}
             </p>
             <p className="text-xs">
