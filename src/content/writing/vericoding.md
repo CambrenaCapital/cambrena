@@ -102,7 +102,7 @@ The common approaches to “AI for formal verification” sit on a spectrum:
 
 - **Vericoding** — humans provide a careful formal Spec, carrying much of the semantic burden, and AI synthesizes the Code and Proof.
 
-- **End-to-end vericoding **— humans describe a system in natural language, and AI produces the Spec, Code, and Proof from scratch.
+- **End-to-end vericoding** — humans describe a system in natural language, and AI produces the Spec, Code, and Proof from scratch.
 
 Vericoding is the LLM generation of formally verified code from a formal specification, i.e. the disciplined counterpart to vibe coding, which produces potentially buggy code from a natural-language description. A program counts as formally verified when the formal verification system’s checker confirms that the Proof demonstrates that the Code satisfies the Spec. The guarantee is unusually strong, but also narrower than it first appears: it shows that code adheres to a formal specification, not necessarily to the original human intent behind it.
 
