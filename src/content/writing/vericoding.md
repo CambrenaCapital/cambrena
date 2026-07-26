@@ -144,23 +144,23 @@ The map is organized along the Spec → Code → Proof pipeline.
 
 ### AI provers
 
-Companies building the AI that writes the proof itself, given a goal already stated in formal logic. These are the engines much of the rest of the map depends on: AlphaProof (Google DeepMind), [Aristotle](https://aristotle.harmonic.fun/) (Harmonic), [Seed-Prover](https://seed.bytedance.com/en/blog/seed-prover-1-5-advanced-mathematical-reasoning-through-a-novel-agentic-architecture) (ByteDance), [Axiom](https://axiommath.ai/), Mistral AI’s Leanstral, [Math Inc.](https://www.math.inc/), [DeepSeek-Prover](https://arxiv.org/abs/2504.21801), and [Aleph](https://logicalintelligence.com/aleph-coding-ai/) (Logical Intelligence), whose energy-based approach stands somewhat apart.
+Companies building the AI that writes the proof itself, given a goal already stated in formal logic. These are the engines much of the rest of the map depends on: AlphaProof (Google DeepMind), [Seed-Prover](https://seed.bytedance.com/en/blog/seed-prover-1-5-advanced-mathematical-reasoning-through-a-novel-agentic-architecture) (ByteDance), Mistral AI’s Leanstral, [DeepSeek-Prover](https://arxiv.org/abs/2504.21801), [Kimina Prover](https://github.com/MoonshotAI/Kimina-Prover-Preview) (Numina & Moonshot AI), [Goedel-Prover](https://goedel-lm.github.io/), core AI math startups like [Aristotle](https://aristotle.harmonic.fun/) (Harmonic), [Math Inc.](https://www.math.inc/), [Axiom](https://axiommath.ai/), or [Morph Labs](https://www.morph.so/), and [Aleph](https://logicalintelligence.com/aleph-coding-ai/) (Logical Intelligence), whose energy-based approach stands somewhat apart.
 
-### End-to-end vericoding: natural language into formal spec, code and proof
+### Natural language into formal spec
 
-AI that turn ambiguous human intent into a precise formal specification, code, and proof. [ICME](https://blog.icme.io/)’s PreFlight converts natural-language policies into formal logic checked by an SMT solver and wrapped in a cryptographic proof. [Galois](https://www.galois.com/ai-for-formal-methods) envisions a workflow in which a designer refines a specification with an AI assistant through natural language, moving from an incomplete state to one that supports formal verification. [Bloom](https://bloom.directory/) is built on the premise that specs are public, with other humans and agents incentivized to find gaps and propose better invariants. [Astrogator](https://arxiv.org/abs/2507.13290) proposes a knowledge base to capture system-specific dependencies and reduce the system knowledge needed to express formal queries.
+AI that turns ambiguous human intent into a precise formal specification. [Pramaana Labs](https://pramaanalabs.ai/) recently announced a $27M Seed round led by Khosla Ventures in June 2026 to bring formal verification to AI in high-stake verticals. [ICME](https://blog.icme.io/)’s PreFlight converts natural-language policies into formal logic checked by an SMT solver and wrapped in a cryptographic proof. [Bloom](https://bloom.directory/) is built on the premise that specs are public, with other humans and agents incentivized to find gaps and propose better invariants. [Astrogator](https://arxiv.org/abs/2507.13290) proposes a knowledge base to capture system-specific dependencies and reduce the system knowledge needed to express formal queries. [AWS](https://docs.aws.amazon.com/bedrock/latest/userguide/guardrails-automated-reasoning-checks.html)’s Automated Reasoning checks (Bedrock Guardrails), which extracts formal logic rules from a customer’s policy document and then mathematically validates LLM responses against them; shipping as a hyperscaler product.
 
 ### Vericoding: AI generates verified code from a spec
 
-Companies where you supply the formal spec and the AI synthesizes both the implementation and its proof, such as [Code Metal](https://www.codemetal.ai/), Cocotec or Scidonia which combines LLMs with symbolic reasoning and formal constraints for high-stakes domains where mistakes are irreversible.
+Companies where you supply the formal spec and the AI synthesizes both the implementation and its proof. [Certora](https://www.certora.com/) is probably the leading smart-contract formal verification company and recently launched AI Composer, an AI coding platform that runs every AI-generated snippet through its formal verification engine before execution, such as [Code Metal](https://www.codemetal.ai/), Cocotec or Scidonia which combine LLMs with symbolic reasoning and formal constraints for high-stakes domains where mistakes are irreversible.
 
 ### Provers: verifying existing code
 
-Companies that prove properties about code that already exists rather than generating anything new. This is the established formal-methods industry now adding AI: AdaCore, TrustInSoft, [Runtime Verification](https://runtimeverification.com/), [Formal Land](https://formal.land/), or [Imandra](https://www.imandra.ai/).
+Companies that prove properties about code that already exists rather than generating anything new. This is the established formal-methods industry now adding AI: AdaCore, TrustInSoft, [Runtime Verification](https://runtimeverification.com/), [Galois](https://www.galois.com/ai-for-formal-methods), [Formal Land](https://formal.land/), Veridise, [Nethermind](https://www.nethermind.io/formal-verification), [Imandra](https://www.imandra.ai/) or [AWS](https://aws.amazon.com/security/provable-security/)’s Automated Reasoning Group (Zelkova, Kani, Cedar) with arguably the largest industrial deployment anywhere.
 
 ### Ecosystem, research, and nonprofits
 
-Organizations that build the shared infrastructure, benchmarks, and open proofs the commercial layers draw on, rather than selling a product, such as [Apart Research](https://apartresearch.com/), [Beneficial AI Foundation](https://www.beneficialaifoundation.org/), or Forall R&D.
+Organizations that build the shared infrastructure, benchmarks, and open proofs the commercial layers draw on, rather than selling a product, such as [Lean FRO](https://lean-lang.org/fro/), [Project Numina](https://projectnumina.ai/), [Apart Research](https://apartresearch.com/), [Beneficial AI Foundation](https://www.beneficialaifoundation.org/), [Atlas Computing](https://atlascomputing.org/), Forall R&D or [Microsoft Research](https://www.microsoft.com/en-us/research/), birthplace of Z3, F*, Dafny, and Lean, and still the source of much of the infrastructure the commercial layers run on.
 
 ![](./public/vericoding_makret_map.png)
 
@@ -182,4 +182,6 @@ Each verified component is also a permanent public good. Unlike proprietary soft
 
 *If you are building something in vericoding or formal verification, or using it in production, please reach out!*
 
-*Many thanks to [Valeriy Zamaraiev](https://x.com/valeryz), [Wyatt Benno](https://x.com/wyatt_benno) and [Gavin Pacini](https://x.com/GavinPacini) for conversations around this topic.*
+*Many thanks to [Valeriy Zamaraiev](https://x.com/valeryz), [Wyatt Benno](https://x.com/wyatt_benno), [Bogdan Stanciu](https://x.com/bog_dan), and [Gavin Pacini](https://x.com/GavinPacini) for conversations around this topic.*
+
+*You could follow me on [X](https://x.com/bastian_wetzel) and [LinkedIn](https://www.linkedin.com/in/bastian-wetzel/).*
