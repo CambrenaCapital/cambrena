@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import logo from "@/assets/cambrena-logo.gif";
+import mountain from "@/assets/cambrena-mountain.webp";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
@@ -16,6 +17,19 @@ const Index = () => {
 
   return (
     <div className="min-h-[100svh] w-full overflow-hidden relative flex items-center justify-center bg-background">
+      {/* Cambrena mountain — dithered point-cloud rendering, bottom-anchored backdrop */}
+      <img
+        src={mountain}
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        loading="eager"
+        decoding="async"
+        className={`pointer-events-none select-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full min-w-[760px] max-w-none h-auto z-0 transition-opacity duration-700 [mask-image:linear-gradient(to_bottom,transparent,black_45%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_45%)] ${
+          animationComplete ? 'opacity-80' : 'opacity-0'
+        }`}
+      />
+
       {/* Animated logo (center → corner) */}
       <div
         className={`absolute z-30 transition-all duration-[1500ms] ease-in-out ${
