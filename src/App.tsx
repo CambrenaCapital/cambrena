@@ -1,7 +1,9 @@
+import type { RouteRecord } from "vite-react-ssg";
+import { ClientOnly } from "vite-react-ssg";
+import { Outlet } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import Imprint from "./pages/Imprint";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
@@ -10,25 +12,49 @@ import NotFound from "./pages/NotFound";
 import VCExitsExplorer from "./pages/VCExitsExplorer";
 import Writing from "./pages/Writing";
 import WritingArticle from "./pages/WritingArticle";
+import { posts } from "@/lib/posts";
 
-const App = () => (
+/**
+ * Root layout: shared providers + the routed <Outlet>. Toasters render only on
+ * the client (they portal into document.body, which doesn't exist during SSG).
+ */
+const RootLayout = () => (
   <TooltipProvider>
-    <Toaster />
-    <Sonner />
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <Routes>
-        <Route path="/" element={<Index />} />
-        <Route path="/imprint" element={<Imprint />} />
-        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        <Route path="/about-us" element={<AboutUs />} />
-        <Route path="/vc-exits-explorer" element={<VCExitsExplorer />} />
-        <Route path="/musings" element={<Writing />} />
-        <Route path="/musings/:slug" element={<WritingArticle />} />
-        {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <Outlet />
+    <ClientOnly>
+      {() => (
+        <>
+          <Toaster />
+          <Sonner />
+        </>
+      )}
+    </ClientOnly>
   </TooltipProvider>
 );
 
-export default App;
+export const routes: RouteRecord[] = [
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      { index: true, element: <Index /> },
+      { path: "imprint", element: <Imprint /> },
+      { path: "privacy-policy", element: <PrivacyPolicy /> },
+      { path: "about-us", element: <AboutUs /> },
+      {
+        // Interactive tool: workers + runtime API. Client-only, so SSG renders
+        // an empty shell rather than executing its render path on the server.
+        path: "vc-exits-explorer",
+        element: <ClientOnly>{() => <VCExitsExplorer />}</ClientOnly>,
+      },
+      { path: "musings", element: <Writing /> },
+      {
+        path: "musings/:slug",
+        element: <WritingArticle />,
+        getStaticPaths: () => posts.map((p) => `/musings/${p.slug}`),
+      },
+      // Catch-all: also drives the static 404 fallback.
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+];
