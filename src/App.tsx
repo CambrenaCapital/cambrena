@@ -1,5 +1,5 @@
 import type { RouteRecord } from "vite-react-ssg";
-import { ClientOnly } from "vite-react-ssg";
+import { ClientOnly, Head } from "vite-react-ssg";
 import { Outlet } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -20,6 +20,26 @@ import { posts } from "@/lib/posts";
  */
 const RootLayout = () => (
   <TooltipProvider>
+    {/* Site-wide default metadata. Per-route pages override via <Seo>. */}
+    <Head>
+      <title>Cambrena Capital</title>
+      <meta
+        name="description"
+        content="Cambrena Capital invests at various stages of startup growth. We provide venture capital funding that isn't bound by traditional fund lifecycles."
+      />
+      <meta property="og:title" content="Cambrena Capital" />
+      <meta
+        property="og:description"
+        content="We back exceptional founders and businesses across venture and growth equity stages, using capital that isn't bound by traditional fund constraints"
+      />
+      <meta property="og:image" content="https://cambrena.net/logo.jpg" />
+      <meta name="twitter:title" content="Cambrena Capital" />
+      <meta
+        name="twitter:description"
+        content="We back exceptional founders and businesses across venture and growth equity stages, using capital that isn't bound by traditional fund constraints"
+      />
+      <meta name="twitter:image" content="https://cambrena.net/logo.jpg" />
+    </Head>
     <Outlet />
     <ClientOnly>
       {() => (

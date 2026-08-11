@@ -2,89 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
+All colors are OKLCH (perceptually uniform — tints/borders/hover states stay warm and
+consistent across the ramp). Values are bare `L C H` triplets consumed via oklch(var()).
 */
 
 @layer base {
   :root {
     /* Cambrena Corporate Design System */
-    --background: 38 38% 94%; /* F6F2EB */
-    --foreground: 0 0% 0%; /* Pure black */
+    --background: 0.9602 0.0108 81.51; /* warm cream #F6F2EB */
+    --foreground: 0.2 0.015 60; /* warm near-black ink #1B150F */
 
-    --card: 38 38% 94%;
-    --card-foreground: 0 0% 0%;
+    --card: 0.9602 0.0108 81.51;
+    --card-foreground: 0.2 0.015 60;
 
-    --popover: 38 38% 94%;
-    --popover-foreground: 0 0% 0%;
+    --popover: 0.9602 0.0108 81.51;
+    --popover-foreground: 0.2 0.015 60;
 
-    --primary: 0 0% 0%; /* Black */
-    --primary-foreground: 38 38% 94%;
+    --primary: 0.2 0.015 60; /* ink */
+    --primary-foreground: 0.9602 0.0108 81.51;
 
-    --secondary: 36 20% 85%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 0.8915 0.0141 78.26;
+    --secondary-foreground: 0.2 0.015 60;
 
-    --muted: 36 15% 80%;
-    --muted-foreground: 0 0% 30%;
+    --muted: 0.8523 0.0143 78.25;
+    --muted-foreground: 0.4184 0 89.88;
 
-    --accent: 38 80% 55%; /* Accent gold/mustard from graphics */
-    --accent-foreground: 0 0% 0%;
+    --accent: 0.7673 0.1464 75.97; /* gold/mustard from graphics */
+    --accent-foreground: 0.2 0.015 60;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 36 25% 91%;
+    --destructive: 0.6368 0.2078 25.33;
+    --destructive-foreground: 0.9363 0.0105 78.27;
 
-    --border: 0 0% 0%;
-    --input: 36 20% 85%;
-    --ring: 0 0% 0%;
+    --border: 0.2 0.015 60; /* ink */
+    --input: 0.8915 0.0141 78.26;
+    --ring: 0.2 0.015 60;
 
     --radius: 0rem; /* Sharp corners for modern corporate look */
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-
-  .dark {
-    /* Keep same design in dark mode */
-    --background: 38 38% 94%;
-    --foreground: 0 0% 0%;
-    --card: 38 38% 94%;
-    --card-foreground: 0 0% 0%;
-    --popover: 38 38% 94%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 0 0% 0%;
-    --primary-foreground: 38 38% 94%;
-    --secondary: 36 20% 85%;
-    --secondary-foreground: 0 0% 0%;
-    --muted: 36 15% 80%;
-    --muted-foreground: 0 0% 30%;
-    --accent: 38 80% 55%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 36 25% 91%;
-    --border: 0 0% 0%;
-    --input: 36 20% 85%;
-    --ring: 0 0% 0%;
-    --sidebar-background: 38 38% 94%;
-    --sidebar-foreground: 0 0% 0%;
-    --sidebar-primary: 0 0% 0%;
-    --sidebar-primary-foreground: 38 38% 94%;
-    --sidebar-accent: 36 20% 85%;
-    --sidebar-accent-foreground: 0 0% 0%;
-    --sidebar-border: 0 0% 0%;
-    --sidebar-ring: 0 0% 0%;
   }
 }
 

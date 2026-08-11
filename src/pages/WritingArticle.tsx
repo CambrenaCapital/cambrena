@@ -4,7 +4,7 @@ import remarkGfm from "remark-gfm";
 import WritingLayout from "@/components/WritingLayout";
 import rehypeFigureCaptions from "@/lib/figureCaptions";
 import { getPostBySlug, formatDate, resolveAsset } from "@/lib/posts";
-import { useDocumentMeta } from "@/lib/useDocumentMeta";
+import Seo from "@/components/Seo";
 
 const components: Components = {
   h1: ({ node, ...props }) => (
@@ -65,18 +65,13 @@ const WritingArticle = () => {
   const { slug } = useParams();
   const post = slug ? getPostBySlug(slug) : undefined;
 
-  useDocumentMeta({
-    title: post ? `${post.title} | Cambrena Capital` : "Musings | Cambrena Capital",
-    description: post?.excerpt,
-    image:
-      post?.coverImage && typeof window !== "undefined"
-        ? `${window.location.origin}${post.coverImage}`
-        : undefined,
-  });
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://cambrena.net";
+  const image = post?.coverImage ? `${origin}${resolveAsset(post.coverImage)}` : undefined;
 
   if (!post) {
     return (
       <WritingLayout>
+        <Seo title="Musings | Cambrena Capital" />
         <div className="max-w-2xl mx-auto">
           <h1 className="text-xl sm:text-2xl font-bold mb-4">Post not found</h1>
           <Link to="/musings" className="text-sm underline hover:opacity-60 transition-opacity">
@@ -89,6 +84,7 @@ const WritingArticle = () => {
 
   return (
     <WritingLayout>
+      <Seo title={`${post.title} | Cambrena Capital`} description={post.excerpt} image={image} />
       <article className="max-w-2xl mx-auto">
         <Link
           to="/musings"
