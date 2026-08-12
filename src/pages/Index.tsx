@@ -1,20 +1,14 @@
-import { useState, useEffect } from "react";
-import logo from "@/assets/cambrena-logo.gif";
+import logo from "@/assets/cambrena-logo.svg";
 import mountain from "@/assets/cambrena-mountain.webp";
 import SiteHeader from "@/components/SiteHeader";
 import SiteFooter from "@/components/SiteFooter";
 
+/**
+ * Landing page. Everything is displayed on load; only the mountain animates in
+ * (a bottom-up point-cloud assemble driven purely by CSS — see .hero-mountain in
+ * index.css, with a reduced-motion fallback). No JS state or timers.
+ */
 const Index = () => {
-  const [animationComplete, setAnimationComplete] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setAnimationComplete(true);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <div className="min-h-[100svh] w-full overflow-hidden relative flex items-center justify-center bg-background">
       {/* Cambrena mountain — dithered point-cloud rendering, bottom-anchored backdrop */}
@@ -25,19 +19,11 @@ const Index = () => {
         draggable={false}
         loading="eager"
         decoding="async"
-        className={`pointer-events-none select-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full min-w-[760px] max-w-none h-auto z-0 transition-opacity duration-700 [mask-image:linear-gradient(to_bottom,transparent,black_45%)] [-webkit-mask-image:linear-gradient(to_bottom,transparent,black_45%)] ${
-          animationComplete ? 'opacity-80' : 'opacity-0'
-        }`}
+        className="hero-mountain pointer-events-none select-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full min-w-[760px] max-w-none h-auto z-0"
       />
 
-      {/* Animated logo (center → corner) */}
-      <div
-        className={`absolute z-30 transition-all duration-[1500ms] ease-in-out ${
-          animationComplete
-            ? 'top-6 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16 scale-100'
-            : 'top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 scale-200'
-        }`}
-      >
+      {/* Logo — static, top-left */}
+      <div className="absolute z-30 top-6 left-4 sm:top-8 sm:left-8 md:top-12 md:left-16">
         <img
           src={logo}
           alt="Cambrena Capital"
@@ -45,21 +31,11 @@ const Index = () => {
         />
       </div>
 
-      {/* Nav / hamburger — fades in after the logo animation */}
-      <div
-        className={`transition-opacity duration-700 ${
-          animationComplete ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-      >
-        <SiteHeader showLogo={false} />
-      </div>
+      {/* Nav / hamburger */}
+      <SiteHeader showLogo={false} />
 
       {/* Main Content */}
-      <main
-        className={`relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center transition-opacity duration-700 ${
-          animationComplete ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
+      <main className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 md:px-8 text-center">
         {/* SEO-optimized H1 for search engines */}
         <h1 className="sr-only">
           Cambrena Capital - Venture Capital and Growth Equity Investments
@@ -76,11 +52,7 @@ const Index = () => {
         </p>
       </main>
 
-      <SiteFooter
-        className={`absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4 transition-opacity duration-700 ${
-          animationComplete ? 'opacity-100' : 'opacity-0'
-        }`}
-      />
+      <SiteFooter className="absolute bottom-4 sm:bottom-6 md:bottom-8 left-1/2 transform -translate-x-1/2 w-full px-4" />
     </div>
   );
 };

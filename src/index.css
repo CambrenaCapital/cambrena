@@ -71,6 +71,14 @@ consistent across the ramp). Values are bare `L C H` triplets consumed via oklch
   animation: rotate-slow 60s linear infinite;
 }
 
+/* Mountain backdrop — dithered point-cloud. Static; the top edge dissolves into the page.
+   No entrance animation. */
+.hero-mountain {
+  opacity: 0.8;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 45%);
+  mask-image: linear-gradient(to bottom, transparent, #000 45%);
+}
+
 /* Screen reader only - visually hidden but accessible to screen readers and search engines */
 .sr-only {
   position: absolute;
