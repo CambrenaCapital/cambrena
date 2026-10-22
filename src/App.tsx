@@ -32,13 +32,16 @@ const RootLayout = () => (
         property="og:description"
         content="We back exceptional founders and businesses across venture and growth equity stages, using capital that isn't bound by traditional fund constraints"
       />
-      <meta property="og:image" content="https://cambrena.net/logo.jpg" />
+      <meta property="og:image" content="https://cambrena.net/og-image.png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content="Cambrena Capital logo" />
       <meta name="twitter:title" content="Cambrena Capital" />
       <meta
         name="twitter:description"
         content="We back exceptional founders and businesses across venture and growth equity stages, using capital that isn't bound by traditional fund constraints"
       />
-      <meta name="twitter:image" content="https://cambrena.net/logo.jpg" />
+      <meta name="twitter:image" content="https://cambrena.net/og-image.png" />
     </Head>
     <Outlet />
     <ClientOnly>
